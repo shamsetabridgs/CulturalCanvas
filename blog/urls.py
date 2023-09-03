@@ -14,4 +14,14 @@ urlpatterns = [
     path('my_blogs/', my_blogs, name='my_blogs'),
     path('add_blog/', add_blog, name='add_blog'),
     path('update_blog/<str:slug>/', update_blog, name='update_blog'),
+    path('report/', report, name='report'),
+
+    
+    # ... other URL patterns ...
+    path('delete_comment/<slug:slug>/<int:comment_id>/', delete_comment, name='delete_comment'),
+    path('delete_reply/<slug:slug>/<int:reply_id>/', delete_reply, name='delete_reply'),
+    
+
+
+
 ]

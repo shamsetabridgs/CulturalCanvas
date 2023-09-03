@@ -31,8 +31,8 @@ class UserRegistrationForm(forms.ModelForm):
         model = self.Meta.model
         user = model.objects.filter(email__iexact=email)
         
-        if user.exists():
-            raise forms.ValidationError("A user with that email already exists")
+        """if user.exists():
+            raise forms.ValidationError("A user with that email already exists")"""
         
         return self.cleaned_data.get('email')
 
@@ -46,6 +46,14 @@ class UserRegistrationForm(forms.ModelForm):
 
         return self.cleaned_data.get('password')
 
+"""
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model=User
+        fields = ('username','email','first_name','last_name')
+        """
 
 class UserProfileUpdateForm(forms.ModelForm):
     def _init__(self, *args, **kwargs):
@@ -71,9 +79,9 @@ class UserProfileUpdateForm(forms.ModelForm):
         model = self.Meta.model
         user = model.objects.filter(email__iexact=email).exclude(pk=self.instance.pk)
         
-        if user.exists():
+        """if user.exists():
             raise forms.ValidationError("A user with that email already exists")
-        
+        """
         return self.cleaned_data.get('email')
 
     def change_password(self):
@@ -93,3 +101,9 @@ class UserProfileUpdateForm(forms.ModelForm):
 
 class ProfilePictureUpdateForm(forms.Form):
     profile_image = forms.ImageField(required=True)
+
+
+from django import forms
+
+class PasswordResetForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg'}))

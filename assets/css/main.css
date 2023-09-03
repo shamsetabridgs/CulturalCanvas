@@ -82,3 +82,70 @@ input, textarea {
 .owl-carousel .owl-item img {
     height: 440px !important;
 }
+
+
+/* styles.css */
+
+.language-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#language-select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#translate-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* reset_password.css */
+/* Additional styling for the password reset form */
+
+.reset-password-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.reset-password-heading {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.reset-password-subtext {
+    font-size: 16px;
+    color: #666;
+}
+
+.reset-form {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.reset-form-label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.reset-form-button {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.reset-form-button:hover {
+    background-color: #0056b3;
+}

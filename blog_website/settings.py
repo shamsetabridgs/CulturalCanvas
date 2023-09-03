@@ -23,9 +23,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0ebap7n0ozdz48o9)*i9v-i&ss@tvsetv4^(!wuoiton@aaux6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost","127.0.0.1","masum.pythonanywhere.com", ]
+
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('bn', _('Bangla')),
+    ('hi', _('Hindi')),
+    ('ur', _('Urdu')),
+    ('ar', _('Arabic')),
+    ('es', _('Spanish')),
+    ('de', _('German')),
+    ('fr', _('French')),
+]
+
+
 
 
 # Application definition
@@ -41,6 +57,9 @@ INSTALLED_APPS = [
     'user_profile',
     'notification',
     'ckeditor',
+    'crispy_forms',
+    'modeltranslation',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +70,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'blog_website.urls'
@@ -67,7 +88,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'blog.context_processors.get_all_categories',
-                'user_profile.context_processors.user_notifications'
+                'user_profile.context_processors.user_notifications',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -120,6 +144,9 @@ USE_L10N = True
 USE_TZ = True
 
 
+CRISPY_TEMPLATE_PACK='bootstrap'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -127,7 +154,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [BASE_DIR / 'assets']
 MEDIA_ROOT = BASE_DIR / 'media'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -136,7 +163,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user_profile.User'
 
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='shamsetabridgsm@gmail.com'
+EMAIL_HOST_PASSWORD='ysvmswssgdmyxyeo'
+EMAIL_PORT=587
+EMAIL_USE_TLS= True
+DEFAULT_FROM_EMAIL='OTF Team<shamsetabridgsm@gmail.com>'
+
+
 AUTHENTICATION_BACKENDS = (
     "user_profile.backends.EmailAuthenticationBackend",
-    "django.contrib.auth.backends.ModelBackend"
+    "django.contrib.auth.backends.ModelBackend",
+
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '259054173622966' #App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '228ebabeb375b538dfb7e1eb66c54044'
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'

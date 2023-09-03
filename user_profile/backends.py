@@ -23,3 +23,4 @@ class EmailAuthenticationBackend(ModelBackend):
             return user
         except ObjectDoesNotExist:
             return None
+            

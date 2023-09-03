@@ -1,25 +1,30 @@
-{% load static %}
-<div class="main-banner header-text">
-    <div class="container-fluid">
-      <div class="owl-banner owl-carousel">
-        {% for blog in blogs|slice:"8" %}
-        <div class="item">
-          <img src="{{blog.banner.url}}" alt="">
-          <div class="item-content">
-            <div class="main-content">
-              <div class="meta-category">
-                <span>{{blog.category}}</span>
+    <!-- Banner Starts Here -->
+
+    {% load static %}
+
+    <div class="main-banner header-text home-features sans-flex">
+        <div class="container-fluid">
+          <div class="owl-banner owl-carousel">
+
+            {% for blog in blogs|slice:"8" %}
+            <div class="item">
+              <img alt width="680" height="430" class="home-feature h-entry"  src="{{blog.banner.url}}" loading="eager">
+              <div class="item-content">
+                <div class="main-content">
+                  <div class="meta-category">
+                   <span >{{blog.category}}</span>
+                  </div>
+                  <a href="{% url 'blog_details' blog.slug %}"><h4>{{blog.title}}</h4></a>
+                  <ul class="post-info">
+                    <li><a href="{% url 'view_user_information' blog.user.username %}">{{blog.user.username}}</a></li>
+                    <li><a href="#">{{blog.created_date}}</a></li>
+                    <li><a href="#">{{blog.blog_comments.all.count}} Comments</a></li>
+                  </ul>
+                </div>
               </div>
-              <a href="{% url 'blog_details' blog.slug %}"><h4>{{blog.title}}</h4></a>
-              <ul class="post-info">
-                <li><a href="#">{{blog.user.username}}</a></li>
-                <li><a href="#">{{blog.created_date}}</a></li>
-                <li><a href="#">{{blog.blog_comments.all.count}} Comments</a></li>
-              </ul>
             </div>
+             {% endfor %}
           </div>
         </div>
-        {% endfor %}
       </div>
-    </div>
-  </div>
+      <!-- Banner Ends Here -->

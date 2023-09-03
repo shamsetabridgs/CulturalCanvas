@@ -40,3 +40,4 @@ class CustomUserManager(BaseUserManager):
             password,
             **extra_fields
         )
+        

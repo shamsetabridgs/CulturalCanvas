@@ -36,7 +36,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     user = models.ForeignKey(
         User,
-        related_name='user_blogs',
+        related_name='user_blog',
         on_delete=models.CASCADE
     )
     category = models.ForeignKey(
@@ -61,6 +61,7 @@ class Blog(models.Model):
     banner = models.ImageField(upload_to='blog_banners')
     description = RichTextField()
     created_date = models.DateField(auto_now_add=True)
+    views = models.ManyToManyField(User, related_name='post_views')
 
     def __str__(self) -> str:
         return self.title
@@ -110,3 +111,13 @@ class Reply(models.Model):
 
     def __str__(self) -> str:
         return self.text
+    
+
+class Report(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.TextField()
+    description = models.TextField()
+    def __str__(self):
+        return self.name
+    
+

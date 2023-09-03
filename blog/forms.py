@@ -20,3 +20,7 @@ class AddBlogForm(forms.ModelForm):
             "banner",
             "description"
         )
+
+class ReportForm(forms.Form):
+    link = forms.URLField(label="Link")
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}), label="Description")

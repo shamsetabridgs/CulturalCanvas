@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Blogs {% endblock title %}
+{% block title%} Blogs {% endblock title %}
 
 {% block content %}
+<div>
+  
+</div>
+
     <section class="blog-posts grid-system">
       <div class="container">
         <div class="row">
@@ -13,8 +17,9 @@
           <div class="col-lg-8">
             <div class="all-blog-posts">
               <div class="row">
-                {% for blog in blogs %}
-                {% include 'blog_card.html' %}
+
+               {% for blog in blogs %}
+              {% include 'blog_card.html' %}
                 {% endfor %}
                 <div class="col-lg-12">
                   {% include 'pagination.html' %}
@@ -22,9 +27,9 @@
               </div>
             </div>
           </div>
-          {% include 'sidebar.html' %}
+            {% include 'sidebar.html' %}
         </div>
       </div>
     </section>
 
-{% endblock content %}
+{% endblock content %}    

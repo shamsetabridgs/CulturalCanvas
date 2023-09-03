@@ -27,8 +27,10 @@
                       <li><a href="{% url 'view_user_information' blog.user.username %}">{{blog.user.username}}</a></li>
                       <li><a href="javascript:void(0);">{{blog.created_date}}</a></li>
                       <li><a href="javascript:void(0);">{{blog.blog_comments.all.count}} Comments</a></li>
+                      <li><a href="javascript:void(0);">{{total_views}} Views</a></li>
                     </ul>
                     <p>{{blog.description|safe}}</p>
+                    
                     <div class="post-options">
                       <div class="row">
                         <div class="col-6">
@@ -92,6 +94,9 @@
                         <div class="right-content">
                           <h4>{{comment.user.username}}<span>{{comment.created_date}}</span></h4>
                           <p>{{comment.text}}</p>
+                          {% if comment.user == request.user %}
+                            <a href="{% url 'delete_comment' blog.slug comment.id %}" class="delete-comment-link">Delete Comment</a>
+                          {% endif %}
                           <form class="submit-reply my-2" id="comment" action="{% url 'add_reply' blog.id comment.id %}" method="POST">
                             {% csrf_token %}
                             <div class="row">
@@ -121,6 +126,9 @@
                         <div class="right-content">
                           <h4>{{reply.user.username}}<span>{{reply.created_date}}</span></h4>
                           <p>{{reply.text}}</p>
+                          {% if reply.user == request.user %}
+                          <a href="{% url 'delete_reply' blog.slug reply.id %}" class="delete-reply-link">Delete Reply</a>
+                          {% endif %}
                         </div>
                       </li>
                       {% endfor %}
@@ -165,13 +173,7 @@
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="row">
-              <div class="col-lg-12">
-                <div class="sidebar-item search">
-                  <form id="search_form" name="gs" method="GET" action="#">
-                    <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
-                  </form>
-                </div>
-              </div>
+              
               <div class="col-lg-12">
                 <div class="sidebar-item recent-posts">
                   <div class="sidebar-heading">
@@ -196,7 +198,7 @@
                   </div>
                   <div class="content">
                     <ul>
-                      {% for category in categories %}
+                      {% for category in categories|slice:"4" %}
                       <li><a href="{% url 'category_blogs' category.slug %}">- {{category.title}}</a></li>
                       {% endfor %}
                     </ul>
