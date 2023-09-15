@@ -7,11 +7,11 @@ from .managers import CustomUserManager
 class User(AbstractUser):
     email = models.EmailField(
         max_length=150,
-        #unique=True,
-        unique=False,
-       #error_messages={
-            #"unique": "The email must be unique"
-       # }
+        unique=True,
+        #unique=False,
+        error_messages={
+            "unique": "The email must be unique"
+        }
         
     )
     profile_image = models.ImageField(

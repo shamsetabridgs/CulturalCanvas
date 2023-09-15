@@ -4,9 +4,11 @@ from django.contrib.contenttypes.models import ContentType
 
 from user_profile.models import User
 
+# Create your models here.
 
-class Notificaiton(models.Model):
-    NOTIFICATION_TYPES = ("Blog", "Like", "Follow")
+class Notification(models.Model):
+
+    NOTIFICATION_TYPES = ("Blog", "Like", "Follow", "Comment", "Reply")
 
     content_type = models.ForeignKey(
         ContentType,

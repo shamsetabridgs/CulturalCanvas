@@ -16,7 +16,7 @@ from .decorators import  (
     not_logged_in_required
 )
 from .models import Follow,User
-from notification.models import Notificaiton
+from notification.models import Notification
 
 #for mail sending and verifying..........
 from django.contrib.sites.shortcuts import get_current_site
@@ -242,7 +242,7 @@ def follow_or_unfollow_user(request, user_id):
 
 @login_required(login_url='login')
 def user_notifications(request):
-    notifications = Notificaiton.objects.filter(
+    notifications = Notification.objects.filter(
         user=request.user,
         is_seen=False
     )

@@ -31,8 +31,8 @@ class UserRegistrationForm(forms.ModelForm):
         model = self.Meta.model
         user = model.objects.filter(email__iexact=email)
         
-        """if user.exists():
-            raise forms.ValidationError("A user with that email already exists")"""
+        if user.exists():
+            raise forms.ValidationError("A user with that email already exists")
         
         return self.cleaned_data.get('email')
 
@@ -79,9 +79,9 @@ class UserProfileUpdateForm(forms.ModelForm):
         model = self.Meta.model
         user = model.objects.filter(email__iexact=email).exclude(pk=self.instance.pk)
         
-        """if user.exists():
+        if user.exists():
             raise forms.ValidationError("A user with that email already exists")
-        """
+        
         return self.cleaned_data.get('email')
 
     def change_password(self):
